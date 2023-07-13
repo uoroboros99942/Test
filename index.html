@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Расчет плитки карты</title>
+    <meta charset="UTF-8">
+    <title>Р Р°СЃС‡РµС‚ РїР»РёС‚РєРё РєР°СЂС‚С‹</title>
     <style>
         #map {
             width: 256px;
@@ -17,18 +18,18 @@
     </style>
 </head>
 <body>
-    <h1>Расчет плитки карты</h1>
+    <h1>Р Р°СЃС‡РµС‚ РїР»РёС‚РєРё РєР°СЂС‚С‹</h1>
     <form id="coordinatesForm">
-        <label for="latitude">Широта:</label>
+        <label for="latitude">РЁРёСЂРѕС‚Р°:</label>
         <input type="text" id="latitude" required>
         <br>
-        <label for="longitude">Долгота:</label>
+        <label for="longitude">Р”РѕР»РіРѕС‚Р°:</label>
         <input type="text" id="longitude" required>
         <br>
-        <label for="zoom">Зум:</label>
+        <label for="zoom">Р—СѓРј:</label>
         <input type="number" id="zoom" min="1" max="19" value="10" required>
         <br>
-        <button type="submit">Рассчитать</button>
+        <button type="submit">Р Р°СЃСЃС‡РёС‚Р°С‚СЊ</button>
     </form>
     <div id="map"></div>
     <div id="result"></div>
@@ -37,26 +38,26 @@
         document.getElementById('coordinatesForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Очистить предыдущие результаты
+            // РћС‡РёСЃС‚РёС‚СЊ РїСЂРµРґС‹РґСѓС‰РёРµ СЂРµР·СѓР»СЊС‚Р°С‚С‹
             document.getElementById('map').innerHTML = '';
             document.getElementById('result').innerHTML = '';
 
-            // Получить введенные значения
+            // РџРѕР»СѓС‡РёС‚СЊ РІРІРµРґРµРЅРЅС‹Рµ Р·РЅР°С‡РµРЅРёСЏ
             var latitude = parseFloat(document.getElementById('latitude').value);
             var longitude = parseFloat(document.getElementById('longitude').value);
             var zoom = parseInt(document.getElementById('zoom').value);
 
-            // Проверка валидности введенных данных
+            // РџСЂРѕРІРµСЂРєР° РІР°Р»РёРґРЅРѕСЃС‚Рё РІРІРµРґРµРЅРЅС‹С… РґР°РЅРЅС‹С…
             if (isNaN(latitude) || isNaN(longitude)) {
-                showError('Некорректные координаты. Пожалуйста, введите числовые значения.');
+                showError('РќРµРєРѕСЂСЂРµРєС‚РЅС‹Рµ РєРѕРѕСЂРґРёРЅР°С‚С‹. РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІРІРµРґРёС‚Рµ С‡РёСЃР»РѕРІС‹Рµ Р·РЅР°С‡РµРЅРёСЏ.');
                 return;
             }
 
-            // Рассчет координат плитки
+            // Р Р°СЃСЃС‡РµС‚ РєРѕРѕСЂРґРёРЅР°С‚ РїР»РёС‚РєРё
             var tileX = Math.floor((longitude + 180) / 360 * Math.pow(2, zoom));
             var tileY = Math.floor((1 - Math.log(Math.tan(latitude * Math.PI / 180) + 1 / Math.cos(latitude * Math.PI / 180)) / Math.PI) / 2 * Math.pow(2, zoom));
 
-            // Показать результаты
+            // РџРѕРєР°Р·Р°С‚СЊ СЂРµР·СѓР»СЊС‚Р°С‚С‹
             showMapTile(tileX, tileY, zoom);
             showResult(tileX, tileY);
         });
@@ -75,13 +76,13 @@
                     map.appendChild(tileImage);
                 })
                 .catch(function(error) {
-                    showError('Ошибка при загрузке плитки карты.');
+                    showError('РћС€РёР±РєР° РїСЂРё Р·Р°РіСЂСѓР·РєРµ РїР»РёС‚РєРё РєР°СЂС‚С‹.');
                 });
         }
 
         function showResult(tileX, tileY) {
             var result = document.getElementById('result');
-            result.innerHTML = 'Рассчитанная плитка: X=' + tileX + ', Y=' + tileY;
+            result.innerHTML = 'Р Р°СЃСЃС‡РёС‚Р°РЅРЅР°СЏ РїР»РёС‚РєР°: X=' + tileX + ', Y=' + tileY;
         }
 
         function showError(message) {
