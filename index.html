@@ -91,6 +91,12 @@
             error.innerHTML = message;
             document.body.insertBefore(error, document.getElementById('map'));
         }
+
+        // Получение информации о браузере с помощью navigator.userAgentData
+        if (navigator.userAgentData) {
+            const browserName = navigator.userAgentData.brands[0].brand;
+            console.log('Браузер:', browserName);
+        }
     </script>
 </body>
 </html>
